@@ -69,7 +69,7 @@ public class NaverMain {
 					continue;
 				}
 			} catch (Exception e) {
-				System.out.println("숫자만 입력가능 합니다.");
+				System.out.println("숫자만 입력가능 합니다.1");
 			}
 
 		}

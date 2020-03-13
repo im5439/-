@@ -15,6 +15,8 @@ public interface Naver {
 	public void updata(); // 정보수정
 	public void findId(); // 아이디검색
 	public void findName(); // 이름검색
+	public void saveInfo(); // 회원목록 파일로 저장
+	public void thread();
 	
 	
 }

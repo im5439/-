@@ -1,5 +1,6 @@
 package com.naver;
 
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -18,6 +19,7 @@ public class NaverImpl implements Naver {
 
 	String id, pw, name;
 
+	
 	@Override
 	public void input() {
 
@@ -82,7 +84,7 @@ public class NaverImpl implements Naver {
 			}
 			break;
 		}
-
+		
 		System.out.print("이름 : ");
 		vo.setName(sc.next());
 
@@ -97,13 +99,21 @@ public class NaverImpl implements Naver {
 
 		System.out.print("전화번호 : ");
 		vo.setTel(sc.next());
-
+		
 		lists.add(vo);
+		
+		System.out.print("\n가입중");
+		thread();
+		System.out.println("\n\n가입완료!!\n");
 	}
 
 	@Override
 	public void print() {
-
+		
+		System.out.print("\n목록을 불러오는중");
+		thread();
+		
+		System.out.println();
 		Iterator<NaverVO> it = lists.iterator();
 		System.out.println("현재 회원수: " + lists.size());
 		while (it.hasNext()) {
@@ -111,6 +121,7 @@ public class NaverImpl implements Naver {
 			NaverVO vo = it.next();
 			System.out.print(vo.toString());
 		}
+		System.out.println();
 
 	}
 
@@ -129,10 +140,18 @@ public class NaverImpl implements Naver {
 			NaverVO vo = it.next();
 
 			if (id.equals(vo.getId()) && pw.equals(vo.getPw())) {
-				lists.remove(vo);
-				System.out.println("삭제 완료");
-				return;
-			}
+//				System.out.print("정말로 삭제하시겠습니까?(Y/N) ");
+//				char yn = (char) sc.nextByte();
+//				if (yn == 'Y' || yn == 'y') {
+					lists.remove(vo);
+					System.out.println("삭제완료!");
+					return;
+//				} else {
+//					System.out.println("취소");
+//					return;
+//				}
+			} else
+				System.out.println("아이디 또는 비밀번호가 틀렸습니다.");
 
 		}
 
@@ -233,9 +252,15 @@ public class NaverImpl implements Naver {
 
 	@Override
 	public void findId() {
+		
 
 		System.out.print("검색할 ID를 입력하세요. : ");
 		id = sc.next();
+
+		System.out.print("\n검색중");
+		thread();
+		System.out.println();
+		
 		Iterator<NaverVO> it = lists.iterator();
 		while (it.hasNext()) {
 
@@ -256,19 +281,50 @@ public class NaverImpl implements Naver {
 
 		System.out.print("검색할 이름을 입력하세요. : ");
 		name = sc.next();
+		
+		System.out.print("\n검색중");
+		thread();
+		System.out.println();
 		Iterator<NaverVO> it = lists.iterator();
 		while (it.hasNext()) {
 
 			NaverVO vo = it.next();
 
-			if (id.equals(vo.getName())) {
+			if (name.equals(vo.getName())) {
 				System.out.println(vo.toString());
 				return;
-			} else if (!id.equals(vo.getName()))
+			} else if (!name.equals(vo.getName())) 
 				System.out.println("잘못된 이름입니다.");
 
 		}
 
+	}
+	
+	@Override
+	public void saveInfo() {
+		
+		try {
+			FileOutputStream fos = new FileOutputStream("d:\\doc\\people");
+			
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+	}
+	
+	
+	@Override
+	public void thread() {
+		
+		Thread t = new Thread(new MyThread());
+		t.start();
+		try {
+			t.join();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	
 	}
 
 }
