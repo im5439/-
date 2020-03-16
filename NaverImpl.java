@@ -315,7 +315,9 @@ public class NaverImpl implements Naver {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		System.out.println("회원목록 저장완료!");
+		System.out.print("회원목록 저장중");
+		thread();
+		System.out.println("\n회원목록 저장완료!!");
 
 	}
 
@@ -326,8 +328,6 @@ public class NaverImpl implements Naver {
 
 			FileInputStream fis = new FileInputStream("d:\\doc\\saveInfo.txt");
 			ObjectInputStream ois = new ObjectInputStream(fis);
-
-//			NaverVO vo = (NaverVO) ois.readObject();
 
 			ArrayList<NaverVO> list = (ArrayList<NaverVO>) ois.readObject();
 			
