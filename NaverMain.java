@@ -28,6 +28,8 @@ public class NaverMain {
 		MyException auth = new MyException();
 
 		String set;
+		
+		ob.readInfo();
 
 		while (true) {
 			try {
@@ -62,6 +64,7 @@ public class NaverMain {
 					ob.findName();
 					break;
 				case "7":
+					ob.saveInfo();
 					System.out.println("<프로그램 종료>");
 					System.exit(0);
 				default:
